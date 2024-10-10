@@ -20,7 +20,7 @@ plugins {
     id("com.diffplug.spotless") version "6.25.0"
 }
 
-version = "0.0.1"
+version = "0.0.2"
 
 group = "com.hedera.hashgraph"
 
@@ -51,7 +51,7 @@ dependencies {
     implementation("me.champeau.jmh:jmh-gradle-plugin:0.7.2")
     implementation("net.swiftzer.semver:semver:2.0.0")
     implementation("org.gradlex:extra-java-module-info:1.9")
-    implementation("org.gradlex:java-module-dependencies:1.7")
+    implementation("org.gradlex:java-module-dependencies:1.7.1")
     implementation("org.gradlex:jvm-dependency-conflict-resolution:2.1.2")
     implementation("org.gradlex:reproducible-builds:1.0")
 }
