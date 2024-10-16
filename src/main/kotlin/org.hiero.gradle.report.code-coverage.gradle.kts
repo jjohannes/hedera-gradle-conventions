@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2024 Hiero a Series of LF Projects, LLC
+ * Copyright (C) 2023-2024 Hiero a Series of LF Projects, LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,15 +14,15 @@
  * limitations under the License.
  */
 
-plugins { id("com.gradle.develocity") version "3.18.1" }
+import org.gradlex.javamodule.dependencies.tasks.ModuleDirectivesScopeCheck
 
-develocity {
-    buildScan {
-        termsOfUseUrl = "https://gradle.com/help/legal-terms-of-use"
-        termsOfUseAgree = "yes"
-        // Enable Gradle Build Scan only with explicit '--scan'
-        publishing.onlyIf { false }
-    }
+plugins {
+    id("java")
+    id("jacoco-report-aggregation")
+    id("org.hiero.gradle.base.jpms-modules")
 }
 
-dependencyResolutionManagement { @Suppress("UnstableApiUsage") repositories.gradlePluginPortal() }
+tasks.withType<ModuleDirectivesScopeCheck> { enabled = false }
+
+// Make aggregation "classpath" use the platform for versions (gradle/versions)
+configurations.aggregateCodeCoverageReportResults { extendsFrom(configurations["internal"]) }

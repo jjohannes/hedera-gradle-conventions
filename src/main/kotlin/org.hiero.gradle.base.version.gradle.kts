@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2024 Hiero a Series of LF Projects, LLC
+ * Copyright (C) 2016-2024 Hiero a Series of LF Projects, LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,15 +14,18 @@
  * limitations under the License.
  */
 
-plugins { id("com.gradle.develocity") version "3.18.1" }
-
-develocity {
-    buildScan {
-        termsOfUseUrl = "https://gradle.com/help/legal-terms-of-use"
-        termsOfUseAgree = "yes"
-        // Enable Gradle Build Scan only with explicit '--scan'
-        publishing.onlyIf { false }
-    }
-}
-
-dependencyResolutionManagement { @Suppress("UnstableApiUsage") repositories.gradlePluginPortal() }
+version =
+    providers
+        .fileContents(isolated.rootProject.projectDirectory.file("version.txt"))
+        .asText
+        .orElse(
+            provider {
+                if (project.parent == null) {
+                    ""
+                } else {
+                    throw RuntimeException("version.txt file not found")
+                }
+            }
+        )
+        .get()
+        .trim()

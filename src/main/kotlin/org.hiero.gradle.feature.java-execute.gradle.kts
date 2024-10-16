@@ -14,15 +14,12 @@
  * limitations under the License.
  */
 
-plugins { id("com.gradle.develocity") version "3.18.1" }
+plugins { id("java") }
 
-develocity {
-    buildScan {
-        termsOfUseUrl = "https://gradle.com/help/legal-terms-of-use"
-        termsOfUseAgree = "yes"
-        // Enable Gradle Build Scan only with explicit '--scan'
-        publishing.onlyIf { false }
+tasks.withType<JavaExec>().configureEach {
+    // Do not yet run things on the '--module-path'
+    modularity.inferModulePath = false
+    if (name.endsWith("main()")) {
+        notCompatibleWithConfigurationCache("JavaExec created by IntelliJ")
     }
 }
-
-dependencyResolutionManagement { @Suppress("UnstableApiUsage") repositories.gradlePluginPortal() }

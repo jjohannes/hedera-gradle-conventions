@@ -14,15 +14,12 @@
  * limitations under the License.
  */
 
-plugins { id("com.gradle.develocity") version "3.18.1" }
+package org.hiero.gradle.extensions
 
-develocity {
-    buildScan {
-        termsOfUseUrl = "https://gradle.com/help/legal-terms-of-use"
-        termsOfUseAgree = "yes"
-        // Enable Gradle Build Scan only with explicit '--scan'
-        publishing.onlyIf { false }
-    }
+enum class CargoToolchain(val platform: String, val target: String, val folder: String) {
+    aarch64Darwin("darwin-aarch64", "aarch64-apple-darwin", "software/darwin/arm64"),
+    aarch64Linux("linux-aarch64", "aarch64-unknown-linux-gnu", "software/linux/arm64"),
+    x86Darwin("darwin-x86-64", "x86_64-apple-darwin", "software/darwin/amd64"),
+    x86Linux("linux-x86-64", "x86_64-unknown-linux-gnu", "software/linux/amd64"),
+    x86Windows("win32-x86-64-msvc", "x86_64-pc-windows-msvc", "software/windows/amd64")
 }
-
-dependencyResolutionManagement { @Suppress("UnstableApiUsage") repositories.gradlePluginPortal() }

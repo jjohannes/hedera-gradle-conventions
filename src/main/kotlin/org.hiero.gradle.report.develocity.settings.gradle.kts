@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-plugins { id("com.gradle.develocity") version "3.18.1" }
+plugins { id("com.gradle.develocity") }
 
 develocity {
     buildScan {
@@ -24,5 +24,3 @@ develocity {
         publishing.onlyIf { false }
     }
 }
-
-dependencyResolutionManagement { @Suppress("UnstableApiUsage") repositories.gradlePluginPortal() }

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2022-2024 Hedera Hashgraph, LLC
+ * Copyright (C) 2022-2024 Hiero a Series of LF Projects, LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -20,11 +20,11 @@ plugins {
     id("com.diffplug.spotless") version "6.25.0"
 }
 
-version = "0.0.2"
+version = "0.0.1"
 
-group = "com.hedera.hashgraph"
+group = "org.hiero"
 
-description = "Gradle convention plugins used in the Hedera organisation"
+description = "Gradle convention plugins used in the Hiero organisation"
 
 // TODO remove once we publish to plugin portal
 publishing.repositories.maven {
@@ -57,8 +57,8 @@ dependencies {
 }
 
 gradlePlugin {
-    website = "https://github.com/hashgraph/hedera-gradle-conventions"
-    vcsUrl = "https://github.com/hashgraph/hedera-gradle-conventions"
+    website = "https://github.com/LFDT-hiero/hiero-gradle-conventions"
+    vcsUrl = "https://github.com/LFDT-hiero/hiero-gradle-conventions"
     plugins.configureEach {
         description = project.description
         @Suppress("UnstableApiUsage")
@@ -74,8 +74,8 @@ publishing.publications.withType<MavenPublication>().configureEach {
         inceptionYear = "2024"
         description = project.description
         organization {
-            name = "Hedera Hashgraph, LLC"
-            url = "https://www.hedera.com"
+            name = "Hiero - a Linux Foundation Decentralized Trust project"
+            url = "https://hiero.org/"
         }
 
         val repoName = project.name
@@ -101,8 +101,8 @@ publishing.publications.withType<MavenPublication>().configureEach {
             developer {
                 name = "Release Engineering Team"
                 email = "release-engineering@hashgraph.com"
-                organization = "Hedera Hashgraph"
-                organizationUrl = "https://www.hedera.com"
+                organization = "Hiero - a Linux Foundation Decentralized Trust project"
+                organizationUrl = "https://hiero.org/"
             }
         }
     }
@@ -112,7 +112,7 @@ spotless {
     val header =
         """
            /*
-            * Copyright (C) ${'$'}YEAR Hedera Hashgraph, LLC
+            * Copyright (C) ${'$'}YEAR Hiero a Series of LF Projects, LLC
             *
             * Licensed under the Apache License, Version 2.0 (the "License");
             * you may not use this file except in compliance with the License.

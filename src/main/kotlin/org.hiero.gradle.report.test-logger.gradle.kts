@@ -14,15 +14,17 @@
  * limitations under the License.
  */
 
-plugins { id("com.gradle.develocity") version "3.18.1" }
+import com.adarshr.gradle.testlogger.theme.ThemeType
 
-develocity {
-    buildScan {
-        termsOfUseUrl = "https://gradle.com/help/legal-terms-of-use"
-        termsOfUseAgree = "yes"
-        // Enable Gradle Build Scan only with explicit '--scan'
-        publishing.onlyIf { false }
-    }
+plugins { id("com.adarshr.test-logger") }
+
+testlogger {
+    theme = ThemeType.MOCHA_PARALLEL
+    slowThreshold = 10000
+    showPassed = false
+    showSkipped = false
+    showStandardStreams = true
+    showPassedStandardStreams = false
+    showSkippedStandardStreams = false
+    showFailedStandardStreams = true
 }
-
-dependencyResolutionManagement { @Suppress("UnstableApiUsage") repositories.gradlePluginPortal() }

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2024 Hiero a Series of LF Projects, LLC
+ * Copyright (C) 2022-2024 Hiero a Series of LF Projects, LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,15 +14,16 @@
  * limitations under the License.
  */
 
-plugins { id("com.gradle.develocity") version "3.18.1" }
+plugins { id("com.diffplug.spotless") }
 
-develocity {
-    buildScan {
-        termsOfUseUrl = "https://gradle.com/help/legal-terms-of-use"
-        termsOfUseAgree = "yes"
-        // Enable Gradle Build Scan only with explicit '--scan'
-        publishing.onlyIf { false }
+spotless {
+    format("misc") {
+        // define the files to apply `misc` to
+        target(".gitignore")
+
+        // define the steps to apply to those files
+        trimTrailingWhitespace()
+        indentWithSpaces()
+        endWithNewline()
     }
 }
-
-dependencyResolutionManagement { @Suppress("UnstableApiUsage") repositories.gradlePluginPortal() }

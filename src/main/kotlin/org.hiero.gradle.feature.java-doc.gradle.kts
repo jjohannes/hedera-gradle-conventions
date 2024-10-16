@@ -14,15 +14,23 @@
  * limitations under the License.
  */
 
-plugins { id("com.gradle.develocity") version "3.18.1" }
+plugins {
+    id("java")
+    id("org.gradlex.reproducible-builds")
+}
 
-develocity {
-    buildScan {
-        termsOfUseUrl = "https://gradle.com/help/legal-terms-of-use"
-        termsOfUseAgree = "yes"
-        // Enable Gradle Build Scan only with explicit '--scan'
-        publishing.onlyIf { false }
+tasks.withType<Javadoc>().configureEach {
+    options {
+        this as StandardJavadocDocletOptions
+        tags(
+            "apiNote:a:API Note:",
+            "implSpec:a:Implementation Requirements:",
+            "implNote:a:Implementation Note:"
+        )
+        options.windowTitle = "Hedera Consensus Node"
+        options.memberLevel = JavadocMemberLevel.PACKAGE
+        addStringOption("Xdoclint:all,-missing", "-Xwerror")
     }
 }
 
-dependencyResolutionManagement { @Suppress("UnstableApiUsage") repositories.gradlePluginPortal() }
+tasks.assemble { dependsOn(tasks.javadoc) }
